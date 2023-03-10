@@ -1,2 +1,2 @@
-# bomb-dahboard-Sanchit
+# bomb-dashboard-Sanchit
 bomb dashboard page
