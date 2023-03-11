@@ -4,7 +4,7 @@ package-lock.json
 *.local.*
 
 # dependencies
-.yarn/*
+.yarn/cache
 /node_modules
 /.pnp
 .pnp.js
