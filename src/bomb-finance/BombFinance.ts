@@ -580,6 +580,54 @@ export class BombFinance {
     return totalValue + boardroomTVL + bombTVL;
   }
 
+  async getBoardRoomTVL(): Promise<Number> {
+    let totalValue = 0;
+    for (const bankInfo of Object.values(bankDefinitions)) {
+      const pool = this.contracts[bankInfo.contract];
+      const token = this.externalTokens[bankInfo.depositTokenName];
+      const tokenPrice = await this.getDepositTokenPriceInDollars(bankInfo.depositTokenName, token);
+      const tokenAmountInPool = await token.balanceOf(pool.address);
+      const value = Number(getDisplayBalance(tokenAmountInPool, token.decimal)) * Number(tokenPrice);
+      const poolValue = Number.isNaN(value) ? 0 : value;
+      totalValue += poolValue;
+    }
+
+    const BSHAREPrice = (await this.getShareStat()).priceInDollars;
+    // const BOMBPrice = (await this.getBombStat()).priceInDollars;
+
+    const boardroomtShareBalanceOf = await this.BSHARE.balanceOf(this.currentBoardroom().address);
+    // const bombStakeBalanceOf = await this.BOMB.balanceOf(this.XBOMB.address);
+
+    const boardroomTVL = Number(getDisplayBalance(boardroomtShareBalanceOf, this.BSHARE.decimal)) * Number(BSHAREPrice);
+    // const bombTVL = Number(getDisplayBalance(bombStakeBalanceOf, this.BOMB.decimal)) * Number(BOMBPrice);
+
+    return boardroomTVL;
+  }
+
+  async getBombTVL(): Promise<Number> {
+    let totalValue = 0;
+    for (const bankInfo of Object.values(bankDefinitions)) {
+      const pool = this.contracts[bankInfo.contract];
+      const token = this.externalTokens[bankInfo.depositTokenName];
+      const tokenPrice = await this.getDepositTokenPriceInDollars(bankInfo.depositTokenName, token);
+      const tokenAmountInPool = await token.balanceOf(pool.address);
+      const value = Number(getDisplayBalance(tokenAmountInPool, token.decimal)) * Number(tokenPrice);
+      const poolValue = Number.isNaN(value) ? 0 : value;
+      totalValue += poolValue;
+    }
+
+    // const BSHAREPrice = (await this.getShareStat()).priceInDollars;
+    const BOMBPrice = (await this.getBombStat()).priceInDollars;
+
+    // const boardroomtShareBalanceOf = await this.BSHARE.balanceOf(this.currentBoardroom().address);
+    const bombStakeBalanceOf = await this.BOMB.balanceOf(this.XBOMB.address);
+
+    // const boardroomTVL = Number(getDisplayBalance(boardroomtShareBalanceOf, this.BSHARE.decimal)) * Number(BSHAREPrice);
+    const bombTVL = Number(getDisplayBalance(bombStakeBalanceOf, this.BOMB.decimal)) * Number(BOMBPrice);
+
+    return bombTVL;
+  }  
+
   /**
    * Calculates the price of an LP token
    * Reference https://github.com/DefiDebauchery/discordpricebot/blob/4da3cdb57016df108ad2d0bb0c91cd8dd5f9d834/pricebot/pricebot.py#L150

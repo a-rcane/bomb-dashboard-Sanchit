@@ -26,9 +26,7 @@ const Bond = lazy(() => import('./views/Bond'));
 const Xbomb = lazy(() => import('./views/Stake'));
 const Supply = lazy(() => import('./views/Supply'));
 
-const Dashboard = lazy(() => import('./views/Dashboard/Dashboard'));
-// const SBS = lazy(() => import('./views/Sbs'));
-// const Liquidity = lazy(() => import('./views/Liquidity'));
+// const Dashboard = lazy(() => import('./views/Dashboard/Dashboard'));
 
 const NoMatch = () => (
   <h3 style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}>
@@ -69,17 +67,8 @@ const App: React.FC = () => {
             <Route path="/supply">
               <Supply />
             </Route>
-            <Route path="/dashboard">
+            {/* <Route path="/dashboard">
               <Dashboard/>
-            </Route>
-            {/* <Route path="/sbs">
-              <SBS />
-            </Route> */}
-            {/* <Route path="/regulations">
-              <Regulations />
-            </Route> */}
-            {/* <Route path="/liquidity">
-              <Liquidity />
             </Route> */}
             <Route path="*">
               <NoMatch />
