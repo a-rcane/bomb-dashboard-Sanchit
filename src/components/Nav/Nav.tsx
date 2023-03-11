@@ -127,9 +127,9 @@ const Nav = () => {
               <Link to="/" className={'navLink ' + classes.link}>
                 Home
               </Link>
-              {/* <Link to="/dashboard" className={'navLink ' + classes.link}>
+              <Link to="/dashboard" className={'navLink ' + classes.link}>
                 Dashboard
-              </Link> */}
+              </Link>
               <div className={'navDropdownMenu'} style={{"display": "inline", "position": "relative"}}>
                 <span className={'navDropdownMenuRoot navLink ' + classes.link}>Earn</span>
                 <div className={'navDropdownMenuContainer'}>
