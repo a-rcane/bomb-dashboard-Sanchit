@@ -43,7 +43,9 @@ import useBombStats from '../../hooks/useBombStats';
 import useClaimRewardCheck from '../../hooks/boardroom/useClaimRewardCheck';
 import { useWallet } from 'use-wallet';
 import metamask from '../../assets/img/metamask-fox.svg';
-import bomb2 from '../../assets/img/bomb2.png'
+import bomb2 from '../../assets/img/bomb2.png';
+import chatDiscord from '../../assets/img/chatDiscord.png';
+import readDocs from '../../assets/img/readDocs.png';
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -290,38 +292,50 @@ const Dashboard = () => {
                   {/* Discord */}
                   
                   <Box style={{ display: 'flex' }}>
-                    <p
-                      style={{
-                        width: '50%',
-                        height: '40px',
-                        backgroundColor: '#E5E5E5',
-                        color: 'black',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        fontSize: '18px',
-                      }}
-                    >
-                      Chat on discord
-                    </p>
-
+                    <div style={{ 
+                      backgroundColor: 'grey', 
+                      marginTop: '1%',
+                      marginBottom: '1%',
+                      width: '50%',
+                      height: '57px',
+                      color: 'black',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                      <img alt="" src={chatDiscord} style={{
+                        marginRight: '3%',
+                        padding: '1%',
+                        width: '9%',
+                        backgroundColor: 'white',
+                        borderRadius: '100%'
+                      }}/>
+                      <p style={{ fontSize: '18px' }}>Chat on discord</p>
+                    </div>
+                    
                     {/* DOCS  */}
-
-                    <p
-                      style={{
-                        width: '45%',
-                        height: '40px',
-                        marginLeft: 'auto',
-                        backgroundColor: '#E5E5E5',
-                        color: 'black',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        fontSize: '18px',
-                      }}
-                    >
-                      Read on docs
-                    </p>
+                    
+                    <div style={{ 
+                      backgroundColor: 'grey', 
+                      marginTop: '1%',
+                      marginBottom: '1%',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      width: '48%',
+                      height: '57px',
+                      marginLeft: 'auto',
+                      color: 'black'
+                    }}>
+                      <img alt="" src={readDocs} style={{
+                        marginRight: '3%',
+                        padding: '1%',
+                        width: '9%',
+                        backgroundColor: 'white',
+                        borderRadius: '100%'
+                      }}/>
+                      <p style={{ fontSize: '18px',}}>Read on docs</p>
+                    </div>
                   </Box>
 
 
@@ -1055,6 +1069,44 @@ const Dashboard = () => {
           </Card>
 
           {/* CARD 3 ENDS */}
+
+          {/* CARD 4 */}
+          <Card style={{             
+            border: '0.1rem solid #006699',
+            width: '100%', 
+            marginBottom: '20px', 
+            backgroundColor: '#20254380' }}>
+            <CardContent align="left">
+
+              <div style={{ display: 'flex' }}>
+                <img
+                  style={{
+                    height: '48px',
+                    marginLeft: '20px',
+                  }}
+                  src={bshares}
+                />
+                <p style={{ fontSize: '22px' }}>Bonds</p>
+                <div
+                  style={{
+                    backgroundColor: '#00E8A2',
+                    height: '16px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginTop: '30px',
+                    marginLeft: '18px',
+                    borderRadius: '5px',
+                  }}
+                >
+                  <p style={{ fontSize: '12px', padding: '18px' }}>Recommended</p>
+                </div>
+              </div>
+
+            </CardContent>
+          </Card>
+
+          {/* CARD 4 ENDS */}
 
         </Grid>
       </Box>
