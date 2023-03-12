@@ -170,7 +170,12 @@ const Dashboard = () => {
 
           {/* CARD 1 LEFT*/}
 
-          <Card style={{ width: '100%', marginBottom: '20px', backgroundColor: '#20254380' }} >
+          <Card style={{ 
+            border: '0.1rem solid #006699',  
+            width: '100%', 
+            marginBottom: '20px', 
+            backgroundColor: '#20254380'
+          }} >
             <CardContent style={{ textAlign: 'center' }}>
               <Typography style={{ textTransform: 'capitalize', color: '#fff', marginBottom: '10px', fontSize: '22px' }} >
                 Bomb Finance Summary
@@ -247,14 +252,23 @@ const Dashboard = () => {
 
           {/* CARD 2 */}
           
-          <Card style={{ width: '100%', marginBottom: '20px', backgroundColor: 'transparent', height: '450px' }}>
+          <Card style={{ 
+            width: '100%', 
+            marginBottom: '20px', 
+            backgroundColor: 'transparent', 
+            height: '485px' }}>
             <CardContent align="center" style={{ display: 'flex' }}>
 
               {/* CARD 2 BOX LEFT */}
-            
-              <Box style={{ width: `calc(65% - 20px)`, backgroundColor: 'transparent' }}>
-                <div>
 
+              <Box style={{ width: `calc(68% - 10px)`, backgroundColor: 'transparent' }}>
+                <div>
+                
+                <Typography style={{
+                  fontSize: '18px',
+                  marginLeft: '70%',
+                  marginBottom: '2%',
+                  }}><a href="#">Read Investment Strategy</a></Typography> 
                   {/* INVEST + DISCORD + DOCS BUTTON */}
 
 
@@ -311,7 +325,12 @@ const Dashboard = () => {
                   </Box>
 
 
-                  <Box style={{ backgroundColor: '#20254380', height: '300px', borderRadius: '10px' }}>
+                  <Box style={{
+                    border: '0.1rem solid #006699',
+                    backgroundColor: '#20254380',
+                    height: '300px', 
+                    borderRadius: '10px' 
+                  }}>
                     <div style={{ display: 'flex' }}>
                       <img
                         alt="" 
@@ -392,7 +411,7 @@ const Dashboard = () => {
 
                       {/* DEPOSIT */}
 
-                      <div style={{ width: '35%', marginRight: '20px' }}>
+                      <div style={{ marginTop: '2%', width: '35%', marginRight: '20px' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                           <div
                             style={{
@@ -508,7 +527,7 @@ const Dashboard = () => {
                               height: '21px',
                               marginLeft: '5px'
                             }}
-                            src={iconArrowDownCir}
+                            src={bomb2}
                           />
                         </button>
                       </div>
@@ -519,7 +538,13 @@ const Dashboard = () => {
 
               {/* CARD 2 BOX RIGHT */}
               
-              <Box style={{ width: '35%', marginLeft: '25px', backgroundColor: '#20254380', borderRadius: '10px' }}>
+              <Box style={{ 
+                border: '0.1rem solid #006699', 
+                width: '35%', 
+                marginLeft: '25px', 
+                backgroundColor: '#20254380', 
+                borderRadius: '10px'
+              }}>
                 <div>
                   <p style={{ fontSize: '22px' }}>Latest News</p>
                 </div>
@@ -532,9 +557,16 @@ const Dashboard = () => {
 
           {/* CARD 2 ENDS */}
 
+
           {/* CARD 3 */}
 
-          <Card style={{ width: '100%', height: '600px', marginBottom: '20px', backgroundColor: '#20254380' }}>
+          <Card style={{ 
+            border: '0.1rem solid #006699',
+            width: '100%',
+            height: '615px', 
+            marginBottom: '20px', 
+            backgroundColor: '#20254380' 
+          }}>
             <CardContent align="center" style={{ display: 'flex' }}>
               <Box style={{ width: '100%', backgroundColor: 'transparent' }}>
                 <div>
@@ -542,7 +574,7 @@ const Dashboard = () => {
 
                     {/* BOMB FARMS */}
 
-                    <div style={{ display: 'flex' }}>
+                    <div style={{ display: 'flex', marginBottom: '20px' }}>
                       <p style={{ fontSize: '22px' }}>Bomb Farms</p>
                       <div
                         style={{
@@ -635,9 +667,12 @@ const Dashboard = () => {
                         </div>
                         <p style={{ fontSize: '14px', marginTop:'30px', marginLeft: 'auto', marginRight: '20px' }}>TVL: </p>
                         <CountUp style={{ fontSize: '14px', marginTop:'30px', marginRight: '20px' }} end={bombTVL} separator="," prefix="$" />
-
                       </div>
-                      <hr></hr>
+                      <hr style={{
+                        marginTop: '-2px',
+                        marginLeft: '5%',
+                        width: '95%',
+                      }}></hr>
                           
                       {/* TABLE */}
                       
@@ -681,22 +716,23 @@ const Dashboard = () => {
                           <p>~$298.88</p>
                         </div>
 
-                        <div style={{ width: '35%', marginTop: '45px', marginLeft: '13%' }}>
+                        <div style={{ width: '35%', marginTop: '60px', marginLeft: '15%' }}>
 
                           {/* DEPOSIT */}
 
-                          <div style={{ display: 'flex', justifyContent: 'space-around', marginLeft: '6px' }}>
+                          <div style={{ display: 'flex', justifyContent: 'center' }}>
                             <div
                               style={{
-                                width: '70%',
-                                height: '18px',
+                                width: '20%',
+                                height: '21px',
                                 border: '1px solid white',
                                 borderRadius: '50px',
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
                                 padding: '4px 10px 4px 15px',
-                                marginTop: '25px'
+                                marginTop: '20px',
+                                marginLeft: 'auto'
                               }}
 
                               onClick = {onPresentDeposit}
@@ -725,16 +761,16 @@ const Dashboard = () => {
 
                             <div
                               style={{
-                                width: '52%',
-                                height: '18px',
+                                width: '20%',
+                                height: '21px',
                                 border: '1px solid white',
                                 borderRadius: '50px',
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
                                 padding: '4px 10px 4px 15px',
-                                marginTop: '25px',
-                                marginLeft: '16px',
+                                marginTop: '20px',
+                                marginLeft: 'auto'
                               }}
 
                               onClick={onPresentWithdraw}
@@ -763,24 +799,191 @@ const Dashboard = () => {
 
                             {/* CLAIM REWARDS */}
 
-                            <button
+                            <div
+                            style={{
+                              width: '35%',
+                              height: '21px',
+                              border: '1px solid white',
+                              borderRadius: '50px',
+                              display: 'flex',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              padding: '4px 10px 4px 15px',
+                              marginTop: '20px',
+                              marginLeft: 'auto'
+
+                            }}
+                          >
+                            <span
                               style={{
-                                width: '100%',
-                                height: '28px',
+                                color: 'rgba(255, 255, 255, 1)',
+                                height: 'auto',
+                                fontSize: 15
+                              }}
+                            >
+                              <span>Claim rewards</span>
+                            </span>
+                            <img
+                              alt=" " 
+                              style={{
+                                width: '21px',
+                                height: '21px',
+                                position: 'relative',
+                                marginLeft: '5px',
+                              }}
+                              src={bomb2}
+                            />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <hr style={{
+                      borderColor: 'cyan',
+                      marginLeft: 0,
+                      marginTop: '5px',
+                      width: '110%',
+                      borderWidth: '1.5px',
+                    }}></hr>
+
+                    {/* BSHARE-BNB */}
+
+                    <div>
+                      <div style={{ marginTop: '3%', display: 'flex' }}>
+                        <img
+                          alt = " " 
+                          style={{
+                            height: '48px',
+                            marginLeft: '20px',
+                          }}
+                          src={bombBitcoinLp}
+                        />
+                        <p style={{ fontSize: '22px' }}>BSHARE-BNB</p>
+                        <div
+                          style={{
+                            backgroundColor: '#00E8A2',
+                            height: '16px',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginTop: '30px',
+                            marginLeft: '18px',
+                            borderRadius: '5px',
+                          }}
+                        >
+                          <p style={{ fontSize: '12px', padding: '18px' }}>Recommended</p>
+                        </div>
+                        <p style={{ fontSize: '14px', marginTop:'30px', marginLeft: 'auto', marginRight: '20px' }}>TVL: </p>
+                        <CountUp style={{ fontSize: '14px', marginTop:'30px', marginRight: '20px' }} end={bombTVL} separator="," prefix="$" />
+
+                      </div>
+                      <hr style={{
+                        marginTop: '-2px',
+                        marginLeft: '5%',
+                        width: '95%',
+                      }}></hr>
+                          
+                      {/* TABLE */}
+                      
+                      <div style={{ display: 'flex' }}>
+                      
+                        <div style={{ width: '20%' }}>
+                          <p>Daily Returns</p>
+                          <p style={{ fontSize: '26px' }}>2%</p>
+                        </div>
+                        <div style={{ width: '15%' }}>
+                          <p>Your Stake :</p>
+                          <p>
+                            <img
+                            alt = "" 
+                              style={{
+                                height: '18px',
+                                marginRight: '10px',
+                              }}
+                              src={bshares}
+                            />
+                            {getDisplayBalance(stakedBalance)}
+                          </p>
+                          <p>~$1171.62</p>
+                        </div>
+
+                        <div style={{ width: '15%' }}>
+                          <p>Earned :</p>
+
+                          <p>
+                            <img
+                              alt = "" 
+                              style={{
+                                height: '18px',
+                                marginRight: '10px',
+                              }}
+                              src={bomb}
+                            />
+                            {earnedInDollars}
+                          </p>
+
+                          <p>~$298.88</p>
+                        </div>
+
+                        <div style={{ width: '35%', marginTop: '60px', marginLeft: '15%' }}>
+
+                          {/* DEPOSIT */}
+
+                          <div style={{ display: 'flex', justifyContent: 'center' }}>
+                            <div
+                              style={{
+                                width: '20%',
+                                height: '21px',
                                 border: '1px solid white',
                                 borderRadius: '50px',
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
                                 padding: '4px 10px 4px 15px',
-                                marginTop: '25px',
-                                marginLeft: '16px',
+                                marginTop: '20px',
+                                marginLeft: 'auto'
                               }}
 
-                              onClick={onReward}
-                              className={earnings.eq(0) || !canClaimReward ? 'shinyButtonDisabled' : 'shinyButton'}
-                              disabled={earnings.eq(0) || !canClaimReward}
+                              onClick = {onPresentDeposit}
+                            >
+                              <span
+                                style={{
+                                  color: 'rgba(255, 255, 255, 1)',
+                                  height: 'auto',
+                                  fontSize: 15
+                                }}
+                              >
+                                <span>Deposit</span>
+                              </span>
+                              <img
+                                alt = "" 
+                                style={{
+                                  width: '21px',
+                                  height: '21px',
+                                  position: 'relative',
+                                }}
+                                src={iconArrowDownCir}
+                              />
+                            </div>
 
+                            {/* WITHDRAW */}
+
+                            <div
+                              style={{
+                                width: '20%',
+                                height: '21px',
+                                border: '1px solid white',
+                                borderRadius: '50px',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                padding: '4px 10px 4px 15px',
+                                marginTop: '20px',
+                                marginLeft: 'auto'
+                              }}
+
+                              onClick={onPresentWithdraw}
                             >
                               <span
                                 style={{
@@ -790,30 +993,64 @@ const Dashboard = () => {
                                   fontSize: 15
                                 }}
                               >
-                                <span>Claim Rewards</span>
+                                <span>Withdraw</span>
                               </span>
+
                               <img
-                                alt = "" 
+                                alt = ""
                                 style={{
                                   width: '21px',
                                   height: '21px',
-                                  marginLeft: '5px'
+                                  position: 'relative',
                                 }}
-                                src={bomb2}
+                                src={iconArrowDownCir}
                               />
-                            </button>
+                            </div>
+
+                            {/* CLAIM REWARDS */}
+
+                            <div
+                            style={{
+                              width: '35%',
+                              height: '21px',
+                              border: '1px solid white',
+                              borderRadius: '50px',
+                              display: 'flex',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              padding: '4px 10px 4px 15px',
+                              marginTop: '20px',
+                              marginLeft: 'auto'
+
+                            }}
+                          >
+                            <span
+                              style={{
+                                color: 'rgba(255, 255, 255, 1)',
+                                height: 'auto',
+                                fontSize: 15
+                              }}
+                            >
+                              <span>Claim rewards</span>
+                            </span>
+                            <img
+                              style={{
+                                width: '21px',
+                                height: '21px',
+                                position: 'relative',
+                                marginLeft: '5px',
+                              }}
+                              src={bomb2}
+                            />
+                            </div>
                           </div>
                         </div>
-
                       </div>
                     </div>
 
-
                   </div>
                 </div>
-              </Box>       
-
-                     
+              </Box>
             </CardContent>
           </Card>
 
