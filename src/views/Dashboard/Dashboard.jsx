@@ -46,6 +46,7 @@ import metamask from '../../assets/img/metamask-fox.svg';
 import bomb2 from '../../assets/img/bomb2.png';
 import chatDiscord from '../../assets/img/chatDiscord.png';
 import readDocs from '../../assets/img/readDocs.png';
+import bbond from '../../assets/img/bbond.png'
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -75,7 +76,8 @@ const Dashboard = () => {
   const tBondStats = useBondStats();
   const bombStats = useBombStats();
   const bombTVL = useBombTVL();
-
+  const bondBalance = useTokenBalance(bombFinance?.BBOND);
+  const bondStat = useBondStats();
 
   // For Table 1 
 
@@ -1080,11 +1082,12 @@ const Dashboard = () => {
 
               <div style={{ display: 'flex' }}>
                 <img
+                  alt=""
                   style={{
                     height: '48px',
                     marginLeft: '20px',
                   }}
-                  src={bshares}
+                  src={bbond}
                 />
                 <p style={{ fontSize: '22px' }}>Bonds</p>
                 <div
@@ -1100,6 +1103,132 @@ const Dashboard = () => {
                   }}
                 >
                   <p style={{ fontSize: '12px', padding: '18px' }}>Recommended</p>
+                </div>
+              </div>
+
+              <div style={{marginRight: '10px'}}>
+                <div style={{ display: 'flex' }}>
+                  <p style={{ fontSize: '14px', marginLeft: '20px' }}>
+                    BBOND can be purchased only on contraction periods, when TWAP of BOMB is below 1
+                  </p>
+                  <div style={{marginLeft: 'auto'}}>
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <p>Purchase BBond</p>
+                    <div
+                      style={{
+                        width: '106px',
+                        height: '28px',
+                        border: '1px solid white',
+                        borderRadius: '50px',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        padding: '4px 10px 4px 15px',
+                        marginTop: '20px',
+                        marginLeft: '20px',
+                      }}
+
+                      
+                    >
+                      <span
+                        style={{
+                          color: 'rgba(255, 255, 255, 1)',
+                          height: 'auto',
+                          textAlign: 'left',
+                          lineHeight: 'normal',
+                          marginRight: '19px',
+                          marginBottom: '0',
+                          alignSelf: 'auto',
+                          fontFamily: 'Nunito',
+                          fontSize: 15,
+                          fontStretch: 'normal',
+                          fontStyle: 'Regular',
+                          fontWeight: 400,
+                          textDecoration: 'none',
+                        }}
+                      >
+                        <span>Purchase</span>
+                      </span>
+                      <img
+                        style={{
+                          width: '21px',
+                          height: '21px',
+                          position: 'relative',
+                        }}
+                        src={iconArrowDownCir}
+                      />
+                    </div>
+                  </div>
+                  <hr></hr>
+                  </div>
+                </div>
+              </div>
+              <div style={{ display: 'flex', marginLeft: '20px', marginRight: '10pxs' }}>
+                <div style={{ width: '25%' }}>
+                  <p>Current Price: (Bomb)^2</p>
+                  <p>BBond = {Number(bondStat?.tokenInFtm).toFixed(4) || '-'} BTCB</p>
+                </div>
+
+                <div style={{ width: '20%' }}>
+                  <p>Avaialabe to redeem:</p>
+                  <p>
+                    <img
+                      style={{
+                        height: '18px',
+                        marginRight: '10px',
+                      }}
+                      src={bshares}
+                    />
+                    {getDisplayBalance(bondBalance)}
+                  </p>
+                </div>
+                <div style={{ marginLeft: 'auto', marginRight: '10px' }}>
+                  
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <p>Redeem Bomb</p>
+                    <div
+                      style={{
+                        width: '106px',
+                        height: '28px',
+                        border: '1px solid white',
+                        borderRadius: '50px',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        padding: '4px 10px 4px 15px',
+                        marginTop: '20px',
+                        marginLeft: '20px',
+                      }}
+                    >
+                      <span
+                        style={{
+                          color: 'rgba(255, 255, 255, 1)',
+                          height: 'auto',
+                          textAlign: 'left',
+                          lineHeight: 'normal',
+                          marginRight: '19px',
+                          marginBottom: '0',
+                          alignSelf: 'auto',
+                          fontFamily: 'Nunito',
+                          fontSize: 15,
+                          fontStretch: 'normal',
+                          fontStyle: 'Regular',
+                          fontWeight: 400,
+                          textDecoration: 'none',
+                        }}
+                      >
+                        <span>Redeem</span>
+                      </span>
+                      <img
+                        style={{
+                          width: '21px',
+                          height: '21px',
+                          position: 'relative',
+                        }}
+                        src={iconArrowDownCir}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
 
