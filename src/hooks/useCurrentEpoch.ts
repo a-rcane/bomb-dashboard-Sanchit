@@ -22,4 +22,4 @@ const useCurrentEpoch = () => {
   return currentEpoch;
 };
 
-export default useCurrentEpoch;
+export default useCurrentEpoch; 

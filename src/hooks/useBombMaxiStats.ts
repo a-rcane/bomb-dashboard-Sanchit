@@ -16,7 +16,7 @@ const useBombMaxiStats = (poolId: string | null | undefined) => {
       if (poolId) {
         const BombMaxi = await bombFinance.getBombMaxiStats(poolId);
         try {
-          setStat(BombMaxi);
+          setStat(BombMaxi); 
         } catch (err) {
           console.log('Error fetching bomb maxi stat');
         }

@@ -35,6 +35,7 @@ import useShareStats from '../../hooks/usebShareStats';
 import DepositModal from '../Stake/components/DepositModal';
 import WithdrawModal from '../Stake/components/WithdrawModal';
 import useStakeToBoardroom from '../../hooks/useStakeToBoardroom';
+import useWithdrawFromBomb from '../../hooks/useWithdrawFromBomb';
 import useWithdrawFromBoardroom from '../../hooks/useWithdrawFromBoardroom';
 import useModal from '../../hooks/useModal';
 import useHarvestFromBoardroom from '../../hooks/useHarvestFromBoardroom';
@@ -47,11 +48,13 @@ import bomb2 from '../../assets/img/bomb2.png';
 import chatDiscord from '../../assets/img/chatDiscord.png';
 import readDocs from '../../assets/img/readDocs.png';
 import bbond from '../../assets/img/bbond.png'
+import useRedeemFromBomb from '../../hooks/useRedeemFromBomb';
+import useStakedBomb from '../../hooks/useStakedBomb';
+import ExchangeModal from '../Bond/components/ExchangeModal';
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 } 
-
 
 const Dashboard = () => {
   const BackgroundImage = createGlobalStyle`
@@ -72,6 +75,7 @@ const Dashboard = () => {
   const cashPrice = useCashPriceInLastTWAP();
   const bondScale = (Number(cashPrice) / 100000000000000).toFixed(4); 
   const stakedBalance = useStakedBalanceOnBoardroom();
+  const stakedBomb = useStakedBomb();
   const bShareStats = useShareStats();
   const tBondStats = useBondStats();
   const bombStats = useBombStats();
@@ -93,16 +97,18 @@ const Dashboard = () => {
   const tBondCirculatingSupply = useMemo(() => (tBondStats ? String(tBondStats.circulatingSupply) : null),[tBondStats],);
   const tBondTotalSupply = useMemo(() => (tBondStats ? String(tBondStats.totalSupply) : null), [tBondStats]);
 
-  const { onStake } = useStakeToBoardroom();
-  const { onWithdraw } = useWithdrawFromBoardroom();
-
   const rows = [
     createData({ name: '$BOMB', icon: '' }, bombCirculatingSupply, bombTotalSupply, bombPriceInBNB, 4.0),
     createData({ name: '$BSHARE', icon: '' }, bShareCirculatingSupply, bShareTotalSupply, bSharePriceInDollars, 4.3),
     createData({ name: '$BBOND', icon: '' }, tBondCirculatingSupply, tBondTotalSupply, tBondPriceInDollars, 6.0),
   ];
 
+  const { onStake } = useStakeToBoardroom();
+  const { onWithdrawBomb } = useWithdrawFromBomb();
+  const { onWithdraw } = useWithdrawFromBoardroom();
   const {onReward} = useHarvestFromBoardroom();
+  const { onRedeemBomb } = useRedeemFromBomb();
+
   const earnings = useEarningsOnBoardroom();
   const canClaimReward = useClaimRewardCheck();
   const tokenBalance = useTokenBalance(bombFinance.BOMB);
@@ -141,7 +147,7 @@ const Dashboard = () => {
       max={tokenBalance}
       onConfirm={(value) => {
         onStake(value);
-        onDismissDeposit();
+        onDismissDepositBomb();
       }}
       tokenName={'LP Tokens'}
     />,
@@ -151,10 +157,21 @@ const Dashboard = () => {
     <WithdrawModal
       max={stakedBalance}
       onConfirm={(value) => {
-        onWithdraw(value);
-        onDismissWithdraw();
+        onWithdrawBomb(value);
+        onDismissWithdrawBomb();
       }}
       tokenName={'LP Tokens'}
+    />,
+  );
+
+  const [onPresentRedeemBomb, onDismissRedeemBomb] = useModal(
+    <WithdrawModal
+      max={stakedBomb}
+      onConfirm={(value) => {
+        onRedeemBomb(value);
+        onDismissRedeemBomb();
+      }}
+      tokenName={'Bonds'}
     />,
   );
 
@@ -260,7 +277,7 @@ const Dashboard = () => {
             width: '100%', 
             marginBottom: '20px', 
             backgroundColor: 'transparent', 
-            height: '485px' }}>
+            height: '70%' }}>
             <CardContent align="center" style={{ display: 'flex' }}>
 
               {/* CARD 2 BOX LEFT */}
@@ -439,7 +456,8 @@ const Dashboard = () => {
                               justifyContent: 'center',
                               alignItems: 'center',
                               padding: '4px 10px 4px 15px',
-                              marginTop: '25px'
+                              marginTop: '25px',
+                              cursor: 'pointer',
                             }}
 
                             onClick = {onPresentDeposit}
@@ -448,7 +466,7 @@ const Dashboard = () => {
                               style={{
                                 color: 'rgba(255, 255, 255, 1)',
                                 height: 'auto',
-                                fontSize: 15
+                                fontSize: 15,
                               }}
                             >
                               <span>Deposit</span>
@@ -478,6 +496,7 @@ const Dashboard = () => {
                               padding: '4px 10px 4px 15px',
                               marginTop: '25px',
                               marginLeft: '16px',
+                              cursor: 'pointer',
                             }}
 
                             onClick={onPresentWithdraw}
@@ -518,7 +537,7 @@ const Dashboard = () => {
                             alignItems: 'center',
                             padding: '4px 10px 4px 15px',
                             marginTop: '15px',
-                
+                            cursor: 'pointer',
                           }}
 
                           onClick={onReward}
@@ -620,9 +639,16 @@ const Dashboard = () => {
                               alignItems: 'center',
                               padding: '4px 10px 4px 15px',
                               marginTop: '20px',
-                              marginLeft: 'auto'
+                              marginLeft: 'auto',
+                              cursor: 'pointer',
                             }}
+
+                            onClick={onReward}
+                            className={earnings.eq(0) || !canClaimReward ? 'shinyButtonDisabled' : 'shinyButton'}
+                            disabled={earnings.eq(0) || !canClaimReward}                          
+
                           >
+                            
                             <span
                               style={{
                                 color: 'rgba(255, 255, 255, 1)',
@@ -748,10 +774,11 @@ const Dashboard = () => {
                                 alignItems: 'center',
                                 padding: '4px 10px 4px 15px',
                                 marginTop: '20px',
-                                marginLeft: 'auto'
+                                marginLeft: 'auto',
+                                cursor: 'pointer',
                               }}
 
-                              onClick = {onPresentDeposit}
+                              onClick = {onPresentDepositBomb}
                             >
                               <span
                                 style={{
@@ -786,10 +813,11 @@ const Dashboard = () => {
                                 alignItems: 'center',
                                 padding: '4px 10px 4px 15px',
                                 marginTop: '20px',
-                                marginLeft: 'auto'
+                                marginLeft: 'auto',
+                                cursor: 'pointer',
                               }}
 
-                              onClick={onPresentWithdraw}
+                              onClick={onPresentWithdrawBomb}
                             >
                               <span
                                 style={{
@@ -826,9 +854,10 @@ const Dashboard = () => {
                               alignItems: 'center',
                               padding: '4px 10px 4px 15px',
                               marginTop: '20px',
-                              marginLeft: 'auto'
-
+                              marginLeft: 'auto',
+                              cursor: 'pointer',
                             }}
+                            
                           >
                             <span
                               style={{
@@ -958,7 +987,8 @@ const Dashboard = () => {
                                 alignItems: 'center',
                                 padding: '4px 10px 4px 15px',
                                 marginTop: '20px',
-                                marginLeft: 'auto'
+                                marginLeft: 'auto',
+                                cursor: 'pointer',
                               }}
 
                               onClick = {onPresentDeposit}
@@ -996,7 +1026,8 @@ const Dashboard = () => {
                                 alignItems: 'center',
                                 padding: '4px 10px 4px 15px',
                                 marginTop: '20px',
-                                marginLeft: 'auto'
+                                marginLeft: 'auto',
+                                cursor: 'pointer',
                               }}
 
                               onClick={onPresentWithdraw}
@@ -1036,20 +1067,26 @@ const Dashboard = () => {
                               alignItems: 'center',
                               padding: '4px 10px 4px 15px',
                               marginTop: '20px',
-                              marginLeft: 'auto'
-
+                              marginLeft: 'auto',
+                              cursor: 'pointer',        
                             }}
+
+                            onClick={onReward}
+                            className={earnings.eq(0) || !canClaimReward ? 'shinyDivDisabled' : 'shinyDiv'}
+                            disabled={earnings.eq(0) || !canClaimReward}
+                          
                           >
                             <span
                               style={{
                                 color: 'rgba(255, 255, 255, 1)',
                                 height: 'auto',
-                                fontSize: 15
+                                fontSize: 15,
                               }}
                             >
                               <span>Claim rewards</span>
                             </span>
                             <img
+                              alt=" "
                               style={{
                                 width: '21px',
                                 height: '21px',
@@ -1073,6 +1110,7 @@ const Dashboard = () => {
           {/* CARD 3 ENDS */}
 
           {/* CARD 4 */}
+
           <Card style={{             
             border: '0.1rem solid #006699',
             width: '100%', 
@@ -1113,7 +1151,7 @@ const Dashboard = () => {
                   </p>
                   <div style={{marginLeft: 'auto'}}>
                   <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <p>Purchase BBond</p>
+                    <p style={{marginTop: '12%'}}>Purchase BBond</p>
                     <div
                       style={{
                         width: '106px',
@@ -1139,17 +1177,18 @@ const Dashboard = () => {
                           marginRight: '19px',
                           marginBottom: '0',
                           alignSelf: 'auto',
-                          fontFamily: 'Nunito',
                           fontSize: 15,
                           fontStretch: 'normal',
                           fontStyle: 'Regular',
                           fontWeight: 400,
                           textDecoration: 'none',
+                          cursor: 'pointer',
                         }}
                       >
                         <span>Purchase</span>
                       </span>
                       <img
+                        alt=" "
                         style={{
                           width: '21px',
                           height: '21px',
@@ -1166,18 +1205,19 @@ const Dashboard = () => {
               <div style={{ display: 'flex', marginLeft: '20px', marginRight: '10pxs' }}>
                 <div style={{ width: '25%' }}>
                   <p>Current Price: (Bomb)^2</p>
-                  <p>BBond = {Number(bondStat?.tokenInFtm).toFixed(4) || '-'} BTCB</p>
+                  <p style={{fontSize:'24px'}}>BBond = {Number(bondStat?.tokenInFtm).toFixed(4) || '-'} BTCB</p>
                 </div>
 
                 <div style={{ width: '20%' }}>
-                  <p>Avaialabe to redeem:</p>
-                  <p>
+                  <p>Available to redeem:</p>
+                  <p style={{fontSize:'24px'}}>
                     <img
+                      alt=""
                       style={{
                         height: '18px',
                         marginRight: '10px',
                       }}
-                      src={bshares}
+                      src={bbond}
                     />
                     {getDisplayBalance(bondBalance)}
                   </p>
@@ -1185,7 +1225,7 @@ const Dashboard = () => {
                 <div style={{ marginLeft: 'auto', marginRight: '10px' }}>
                   
                   <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <p>Redeem Bomb</p>
+                    <p style={{marginTop: '12%'}}>Redeem Bomb</p>
                     <div
                       style={{
                         width: '106px',
@@ -1199,6 +1239,8 @@ const Dashboard = () => {
                         marginTop: '20px',
                         marginLeft: '20px',
                       }}
+
+                      onClick = {onPresentRedeemBomb}
                     >
                       <span
                         style={{
@@ -1209,17 +1251,18 @@ const Dashboard = () => {
                           marginRight: '19px',
                           marginBottom: '0',
                           alignSelf: 'auto',
-                          fontFamily: 'Nunito',
                           fontSize: 15,
                           fontStretch: 'normal',
                           fontStyle: 'Regular',
                           fontWeight: 400,
                           textDecoration: 'none',
+                          cursor: 'pointer',
                         }}
                       >
                         <span>Redeem</span>
                       </span>
                       <img
+                        alt=" "
                         style={{
                           width: '21px',
                           height: '21px',

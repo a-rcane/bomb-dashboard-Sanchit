@@ -358,3 +358,11 @@ code {
     height: auto;
   }
 }
+
+.shinyDiv {
+  cursor: pointer;
+}
+
+.shinyDivDisabled {
+  cursor: not-allowed;
+}
