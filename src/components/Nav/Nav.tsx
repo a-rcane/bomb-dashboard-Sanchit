@@ -279,6 +279,7 @@ const Nav = () => {
                   <AccountButton text="Connect" />
                 </ListItem>
                 <ListItemLink primary="Home" to="/" />
+                <ListItemLink primary="Dashboard" to="/dashboard" />
                 <ListItemLink primary="Farm" to="/farm" />
                 <ListItemLink primary="xBOMB" to="/xbomb" />
                 <ListItemLink primary="Boardroom" to="/boardroom" />
